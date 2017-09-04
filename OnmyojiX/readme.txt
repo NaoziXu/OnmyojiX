@@ -8,7 +8,7 @@ OnmyojiX1.0是一个基于java和sikuliX1.1.1实现的，针对阴阳师手游�
 在通过文档和一些博客了解了sikuliX并体验了阴阳师桌面版后，我就开始了OnmyojiX作为对UI级自动化测试的练习。
 
 配置：
-由于sikuliX基于图像，所以对系统分辨率、阴阳师桌面版窗口大小、素材图片大小都有要求。这里推荐使用1960*1080的桌面分辨率，原始的阴阳师桌面版窗口大小以及\OnmyojiX\image\onmyoji\目录下的图片作为素材。
+由于sikuliX基于图像，所以对系统分辨率、阴阳师桌面版窗口大小、素材图片大小都有要求。这里推荐使用1920*1080的桌面分辨率，原始的阴阳师桌面版窗口大小以及\OnmyojiX\image\onmyoji\目录下的图片作为素材。
 对于控制任务，\OnmyojiX\properties\config.properties中的custom配置有一些属性可供使用者自行控制任务的内容。
 1.onmyoji.mode：任务模式，0为单人，1为队长，2为队员
 2.onmyoji.member.number：队伍人数，在队长模式下生效，在2和3中选择
