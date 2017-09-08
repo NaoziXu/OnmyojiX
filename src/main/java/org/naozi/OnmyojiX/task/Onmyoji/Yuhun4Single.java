@@ -18,8 +18,6 @@ public class Yuhun4Single extends BasicTask {
         try {
             boolean success = false;
             int round = 0;
-            // switch app
-            getAndFocusOnApp(OnmyojiConfig.ONMYOJI_APP_NAME);
             // get cycle time
             Integer cycleTime = Integer.valueOf(PropertiesLoader.getProperty("onmyoji.cycle.time"));
 
