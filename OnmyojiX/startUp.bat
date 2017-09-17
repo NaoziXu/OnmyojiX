@@ -1,0 +1,1 @@
+java -jar E:\OnmyojiX\OnmyojiX.jar

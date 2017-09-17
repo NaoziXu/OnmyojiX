@@ -23,28 +23,21 @@ public class Yuhun4Member extends BasicTask {
 
             // task start
             while (round < cycleTime){
-                // wait for ready appear
-                if(waitForAppear(OnmyojiConfig.ONMYOJI_READY,true)){
-                    // click ready btn
-                    if(clickToMakeDisappear(OnmyojiConfig.ONMYOJI_READY,true)){
-                        logger.info("get ready for start, sleep " + SLEEP_TIME + " ms...");
-                        Thread.sleep(SLEEP_TIME);
-                        // wait for battle result
-                        String[] winOrLose = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
-                        Region resultRegion = waitForAppearAndGetRegion(winOrLose,false);
-                        if(resultRegion != null){
-                            if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_MENBER_START,true)){                                // wait for invite
-                                // start again
-                                clickToMakeDisappear(OnmyojiConfig.ONMYOJI_MENBER_START,true);
-                                success = true;
-                            }
-                        }
+                // wait for battle result
+                String[] winOrLose = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
+                Region resultRegion = waitForAppearAndGetRegion(winOrLose,false);
+                if(resultRegion != null){
+                    // wait for new round
+                    if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_READY,true)){
+                        success = true;
                     }
-                    round ++;
                 }
+                round ++;
                 // result
                 if(success){
-                    logger.info("round success,{}",round);
+                    logger.info("member round success,{}",round);
+                    logger.info("get ready for start, sleep " + SLEEP_TIME + " ms...");
+                    Thread.sleep(SLEEP_TIME);
                 }
                 else{
                     logger.info("round failed,{}",round);

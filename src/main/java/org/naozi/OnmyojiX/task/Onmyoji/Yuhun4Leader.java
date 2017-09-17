@@ -25,49 +25,38 @@ public class Yuhun4Leader extends BasicTask {
 
             // task start
             while (round < cycleTime){
-                // wait for ready appear
-                if(waitForAppear(OnmyojiConfig.ONMYOJI_READY,true)){
-                    // click ready btn
-                    if(clickToMakeDisappear(OnmyojiConfig.ONMYOJI_READY,true)){
-                        logger.info("get ready for start, sleep " + SLEEP_TIME + " ms...");
-                        Thread.sleep(SLEEP_TIME);
-                        // wait for battle result
-                        String[] winOrLose = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
-                        Region resultRegion = waitForAppearAndGetRegion(winOrLose,false);
-                        if(resultRegion != null){
-                            if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_LEADER_REPEAT,true)){
-                                // do repeat
-                                if(clickToMakeDisappear(OnmyojiConfig.ONMYOJI_LEADER_REPEAT,true)){
-                                    // wait for invite
-                                    if(waitForAppear(OnmyojiConfig.ONMYOJI_LEADER_LEAVE,true)){
-                                        // 2 players
-                                        if(memberNum == 2){
-                                            // wait for member
-                                            if(waitForAppear(OnmyojiConfig.ONMYOJI_LEADER_START,true)){
-                                                // start again
-                                                clickToMakeDisappear(OnmyojiConfig.ONMYOJI_LEADER_START,true);
-                                                success = true;
-                                            }
-                                        }
-                                        //3 players
-                                        else if(memberNum == 3){
-                                            // wait for member
-                                            if(waitForDisappear(OnmyojiConfig.ONMYOJI_LEADER_INVITE,true)){
-                                                // start again
-                                                clickToMakeDisappear(OnmyojiConfig.ONMYOJI_LEADER_START,true);
-                                                success = true;
-                                            }
-                                        }
-                                    }
-                                }
+                // wait for battle result
+                String[] winOrLose = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
+                Region resultRegion = waitForAppearAndGetRegion(winOrLose,false);
+                if(resultRegion != null){
+                    // get to team step
+                    if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_LEADER_LEAVE,true)){
+                        // 2 players
+                        if(memberNum == 2){
+                            // wait for member
+                            if(waitForAppear(OnmyojiConfig.ONMYOJI_LEADER_START,true)){
+                                // start again
+                                clickToMakeDisappear(OnmyojiConfig.ONMYOJI_LEADER_START,true);
+                                success = true;
+                            }
+                        }
+                        //3 players
+                        else if(memberNum == 3){
+                            // wait for member
+                            if(waitForDisappear(OnmyojiConfig.ONMYOJI_LEADER_INVITE,true)){
+                                // start again
+                                clickToMakeDisappear(OnmyojiConfig.ONMYOJI_LEADER_START,true);
+                                success = true;
                             }
                         }
                     }
-                    round ++;
                 }
+                round ++;
                 // result
                 if(success){
-                    logger.info("round success,{}",round);
+                    logger.info("leader round success,{}",round);
+                    logger.info("get ready for start, sleep " + SLEEP_TIME + " ms...");
+                    Thread.sleep(SLEEP_TIME);
                 }
                 else{
                     logger.info("round failed,{}",round);
