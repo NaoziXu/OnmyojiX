@@ -17,14 +17,14 @@ public class Yuhun4Leader extends BasicTask {
     public void start() {
         try {
             boolean success = false;
-            int round = 0;
+            int round = 1;
             // get cycle time
             Integer cycleTime = Integer.valueOf(PropertiesLoader.getProperty("onmyoji.cycle.time"));
             // get member number
             Integer memberNum = Integer.valueOf(PropertiesLoader.getProperty("onmyoji.member.number"));
 
             // task start
-            while (round < cycleTime){
+            while (round <= cycleTime){
                 // wait for battle result
                 String[] winOrLose = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
                 Region resultRegion = waitForAppearAndGetRegion(winOrLose,false);
@@ -51,7 +51,6 @@ public class Yuhun4Leader extends BasicTask {
                         }
                     }
                 }
-                round ++;
                 // result
                 if(success){
                     logger.info("leader round success,{}",round);
@@ -62,8 +61,10 @@ public class Yuhun4Leader extends BasicTask {
                     logger.info("round failed,{}",round);
                     break;
                 }
+                round ++;
             }
             logger.info("Task finished...shut down...");
+            clickToMakeDisappear(OnmyojiConfig.ONMYOJI_EXIT,true);
         } catch (Exception e) {
             logger.error("task error,{}",e);
         }

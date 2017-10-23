@@ -22,4 +22,5 @@ public class OnmyojiConfig {
     public static final String ONMYOJI_LEADER_INVITE = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.leader.invite");
     public static final String ONMYOJI_MENBER_START = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.member.start");
     public static final String ONMYOJI_SINGLE_START = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.single.start");
+    public static final String ONMYOJI_EXIT = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.exit");
 }
