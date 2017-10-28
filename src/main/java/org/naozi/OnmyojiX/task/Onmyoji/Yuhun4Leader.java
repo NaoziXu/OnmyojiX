@@ -24,7 +24,7 @@ public class Yuhun4Leader extends BasicTask {
             Integer memberNum = Integer.valueOf(PropertiesLoader.getProperty("onmyoji.member.number"));
 
             // task start
-            while (round <= cycleTime){
+            while (round < cycleTime){
                 // wait for battle result
                 String[] winOrLose = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
                 Region resultRegion = waitForAppearAndGetRegion(winOrLose,false);

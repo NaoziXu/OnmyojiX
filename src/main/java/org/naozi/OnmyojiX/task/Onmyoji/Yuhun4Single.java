@@ -17,7 +17,7 @@ public class Yuhun4Single extends BasicTask {
     public void start() {
         try {
             boolean success = false;
-            int round = 0;
+            int round = 1;
             // get cycle time
             Integer cycleTime = Integer.valueOf(PropertiesLoader.getProperty("onmyoji.cycle.time"));
 
@@ -53,6 +53,7 @@ public class Yuhun4Single extends BasicTask {
                 }
             }
             logger.info("Task finished...shut down...");
+            clickToMakeDisappear(OnmyojiConfig.ONMYOJI_EXIT,true);
         } catch (Exception e) {
             logger.error("task error,{}",e);
         }
