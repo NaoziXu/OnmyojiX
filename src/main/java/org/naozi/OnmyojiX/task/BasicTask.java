@@ -19,6 +19,7 @@ public abstract class BasicTask {
     private static final double STEP_TIME = 0.1;
     private static final long ACTION_TIME = Long.parseLong(PropertiesLoader.getProperty("onmyoji.action.time"));
     protected static final long SLEEP_TIME = Long.parseLong(PropertiesLoader.getProperty("onmyoji.sleep.time"));
+    protected static final boolean TEAM_LOCK = Boolean.parseBoolean(PropertiesLoader.getProperty("onmyoji.lock"));
 
     private Screen screen = new Screen();
 

@@ -21,6 +21,7 @@ OnmyojiX1.0
  3.onmyoji.cycle.time：循环次数，以阴阳师桌面版中的进度配置作为标准决定  
  4.onmyoji.sleep.time：线程休眠时间，即为保留计算机性能，自动战斗期间不进行轮询图像匹配的时间    
  5.onmyoji.action.time：动作时间，即每一个游戏操作步骤的超时时间，超时则停止进程  
+ 6.onmyoji.lock：是否锁定阵容，true锁定，不执行准备步骤，false不锁定，跳过准备步骤
 
 使用方法
 ---

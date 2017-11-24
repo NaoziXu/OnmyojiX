@@ -23,25 +23,31 @@ public class Yuhun4Single extends BasicTask {
 
             // task start
             while (round < cycleTime){
-                // wait for ready appear
-                if(waitForAppear(OnmyojiConfig.ONMYOJI_READY,true)){
-                    // click ready btn
-                    if(clickToMakeDisappear(OnmyojiConfig.ONMYOJI_READY,true)){
-                        logger.info("get ready for start, sleep " + SLEEP_TIME + " ms...");
-                        Thread.sleep(SLEEP_TIME);
-                        // wait for battle result
-                        String[] result = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
-                        Region resultRegion = waitForAppearAndGetRegion(result,false);
-                        if(resultRegion != null){
-                            // finish current round and get to repeat
-                            if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_SINGLE_START,true)){
-                                // start again
-                                clickToMakeDisappear(OnmyojiConfig.ONMYOJI_SINGLE_START,true);
-                                success = true;
-                            }
+                boolean hasNoError = true;
+                if(!TEAM_LOCK){
+                    // wait for ready appear
+                    if(waitForAppear(OnmyojiConfig.ONMYOJI_READY,true)) {
+                        // click ready btn
+                        boolean getReady = clickToMakeDisappear(OnmyojiConfig.ONMYOJI_READY, true);
+                        if(!getReady){
+                            hasNoError = false;
                         }
                     }
-                    round ++;
+                }
+                if(hasNoError){
+                    logger.info("get ready for start, sleep " + SLEEP_TIME + " ms...");
+                    Thread.sleep(SLEEP_TIME);
+                    // wait for battle result
+                    String[] result = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
+                    Region resultRegion = waitForAppearAndGetRegion(result,false);
+                    if(resultRegion != null){
+                        // finish current round and get to repeat
+                        if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_SINGLE_START,true)){
+                            // start again
+                            clickToMakeDisappear(OnmyojiConfig.ONMYOJI_SINGLE_START,true);
+                            success = true;
+                        }
+                    }
                 }
                 // result
                 if(success){
@@ -51,6 +57,7 @@ public class Yuhun4Single extends BasicTask {
                     logger.info("round failed,{}",round);
                     break;
                 }
+                round ++;
             }
             logger.info("Task finished...shut down...");
             clickToMakeDisappear(OnmyojiConfig.ONMYOJI_EXIT,true);
