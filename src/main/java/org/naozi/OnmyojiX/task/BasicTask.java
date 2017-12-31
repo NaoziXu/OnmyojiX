@@ -1,5 +1,6 @@
 package org.naozi.OnmyojiX.task;
 
+import org.naozi.OnmyojiX.config.OnmyojiConfig;
 import org.naozi.OnmyojiX.loader.PropertiesLoader;
 import org.sikuli.script.*;
 
@@ -310,5 +311,29 @@ public abstract class BasicTask {
             logger.error("wait for disappear failed,{}",e);
             return false;
         }
+    }
+
+    /**
+     * start a new thread to refuse task invite
+     */
+    protected void autoRefuseTaskInvite(){
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    // find task invite from friend
+                    if(targetExists(OnmyojiConfig.ONMYOJI_TASK_REFUSE)){
+                        // refuse
+                        clickToMakeDisappear(OnmyojiConfig.ONMYOJI_TASK_REFUSE,true);
+                    }
+                    try {
+                        Thread.sleep(300L);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        thread.start();
     }
 }

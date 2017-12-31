@@ -23,4 +23,6 @@ public class OnmyojiConfig {
     public static final String ONMYOJI_MENBER_START = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.member.start");
     public static final String ONMYOJI_SINGLE_START = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.single.start");
     public static final String ONMYOJI_EXIT = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.exit");
+    public static final String ONMYOJI_TASK_INVITE = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.task.invite");
+    public static final String ONMYOJI_TASK_REFUSE = PropertiesLoader.getImagePath(FOLDER_NAME,"onmyoji.task.refuse");
 }

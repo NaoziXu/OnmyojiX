@@ -23,8 +23,8 @@ public class PropertiesLoader {
         // get path
         String jarPath = System.getProperty("java.class.path");
         String[] pathSplit = jarPath.split("\\\\");
-        DIR_PATH = jarPath.substring(0,jarPath.indexOf(pathSplit[pathSplit.length - 1]));
-//        DIR_PATH = "OnmyojiX\\"; // use for debug in IDE
+//        DIR_PATH = jarPath.substring(0,jarPath.indexOf(pathSplit[pathSplit.length - 1]));
+        DIR_PATH = "OnmyojiX\\"; // use for debug in IDE
     }
 
     public static String getDirPath(){

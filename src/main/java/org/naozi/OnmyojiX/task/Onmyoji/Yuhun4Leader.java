@@ -16,6 +16,8 @@ public class Yuhun4Leader extends BasicTask {
 
     public void start() {
         try {
+            // start a thread to refuse task from friend
+            autoRefuseTaskInvite();
             boolean success = false;
             int round = 1;
             // get cycle time
@@ -24,13 +26,17 @@ public class Yuhun4Leader extends BasicTask {
             Integer memberNum = Integer.valueOf(PropertiesLoader.getProperty("onmyoji.member.number"));
 
             // task start
-            while (round < cycleTime){
+            while (true){
                 // wait for battle result
                 String[] winOrLose = new String[]{OnmyojiConfig.ONMYOJI_LOOT};
                 Region resultRegion = waitForAppearAndGetRegion(winOrLose,false);
                 if(resultRegion != null){
                     // get to team step
                     if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_LEADER_LEAVE,true)){
+                        // task finished
+                        if(round >= cycleTime){
+                            break;
+                        }
                         // 2 players
                         if(memberNum == 2){
                             // wait for member

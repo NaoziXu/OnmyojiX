@@ -16,13 +16,15 @@ public class Yuhun4Single extends BasicTask {
 
     public void start() {
         try {
+            // start a thread to refuse task from friend
+            autoRefuseTaskInvite();
             boolean success = false;
             int round = 1;
             // get cycle time
             Integer cycleTime = Integer.valueOf(PropertiesLoader.getProperty("onmyoji.cycle.time"));
 
             // task start
-            while (round < cycleTime){
+            while (true){
                 boolean hasNoError = true;
                 if(!TEAM_LOCK){
                     // wait for ready appear
@@ -43,6 +45,10 @@ public class Yuhun4Single extends BasicTask {
                     if(resultRegion != null){
                         // finish current round and get to repeat
                         if(clickRegionToGetAppear(resultRegion,OnmyojiConfig.ONMYOJI_SINGLE_START,true)){
+                            // task finished
+                            if(round >= cycleTime){
+                                break;
+                            }
                             // start again
                             clickToMakeDisappear(OnmyojiConfig.ONMYOJI_SINGLE_START,true);
                             success = true;
@@ -51,10 +57,10 @@ public class Yuhun4Single extends BasicTask {
                 }
                 // result
                 if(success){
-                    logger.info("round success,{}",round);
+                    logger.info("round success,{}",round - 1);
                 }
                 else{
-                    logger.info("round failed,{}",round);
+                    logger.info("round failed,{}",round - 1);
                     break;
                 }
                 round ++;
