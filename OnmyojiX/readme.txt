@@ -15,6 +15,8 @@ OnmyojiX1.0是一个基于java和sikuliX1.1.1实现的，针对阴阳师手游�
 3.onmyoji.cycle.time：循环次数，以阴阳师桌面版中的进度配置作为标准决定
 4.onmyoji.sleep.time：线程休眠时间，即为保留计算机性能，自动战斗期间不进行轮询图像匹配的时间
 5.onmyoji.action.time：动作时间，即每一个游戏操作步骤的超时时间，超时则停止进程
+6.onmyoji.lock：是否锁定阵容，true锁定，不执行准备步骤，false不锁定，跳过准备步骤
+7.onmyoji.auto.refuse：是否自动拒绝，true拒绝，拒绝一切任务过程中的邀请，false不处理
 
 使用方法：
 即便OnmyojiX目前已经号称是1.0-RELEASE版本，但仍然只能通过控制台运行可执行jar包达到脚本控制的目的，在有生之年可能只有小概率会出现依赖Swing开发进程可视化窗口的版本，请大家不要抱有期待。

@@ -23,6 +23,7 @@ public abstract class BasicTask {
     protected static final boolean TEAM_LOCK = Boolean.parseBoolean(PropertiesLoader.getProperty("onmyoji.lock"));
 
     private Screen screen = new Screen();
+    private boolean taskContinue = true;
 
     /**
      * make thread sleep to wait sikuliX finish current step
@@ -317,23 +318,34 @@ public abstract class BasicTask {
      * start a new thread to refuse task invite
      */
     protected void autoRefuseTaskInvite(){
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(true){
-                    // find task invite from friend
-                    if(targetExists(OnmyojiConfig.ONMYOJI_TASK_REFUSE)){
-                        // refuse
-                        clickToMakeDisappear(OnmyojiConfig.ONMYOJI_TASK_REFUSE,true);
-                    }
-                    try {
-                        Thread.sleep(300L);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+        Boolean autoRefuse = Boolean.parseBoolean(PropertiesLoader.getProperty("onmyoji.auto.refuse"));
+        if(autoRefuse){
+            taskContinue = true;
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while(taskContinue){
+                        // find task invite from friend
+                        if(targetExists(OnmyojiConfig.ONMYOJI_TASK_REFUSE)){
+                            // refuse
+                            clickToMakeDisappear(OnmyojiConfig.ONMYOJI_TASK_REFUSE,true);
+                        }
+                        try {
+                            Thread.sleep(300L);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        });
-        thread.start();
+            });
+            thread.start();
+        }
+    }
+
+    /**
+     * stop the thread to refuse task
+     */
+    protected void stopAutoRefuse(){
+        taskContinue = false;
     }
 }

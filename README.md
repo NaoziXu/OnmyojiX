@@ -22,7 +22,7 @@ OnmyojiX1.0
  4.onmyoji.sleep.time：线程休眠时间，即为保留计算机性能，自动战斗期间不进行轮询图像匹配的时间    
  5.onmyoji.action.time：动作时间，即每一个游戏操作步骤的超时时间，超时则停止进程  
  6.onmyoji.lock：是否锁定阵容，true锁定，不执行准备步骤，false不锁定，跳过准备步骤
- 
+ 7.onmyoji.auto.refuse：是否自动拒绝，true拒绝，拒绝一切任务过程中的邀请，false不处理
 
 使用方法
 ---

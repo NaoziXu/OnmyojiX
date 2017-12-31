@@ -51,6 +51,7 @@ public class Yuhun4Member extends BasicTask {
                 }
             }
             logger.info("Task finished...shut down...");
+            stopAutoRefuse();
             clickToMakeDisappear(OnmyojiConfig.ONMYOJI_EXIT,true);
         } catch (Exception e) {
             logger.error("task error,{}",e);
