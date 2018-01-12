@@ -36,6 +36,15 @@
     </parent>
 
     <dependencies>
+        <!-- opencv -->
+        <dependency>
+            <groupId>opencv-340.jar</groupId>
+            <artifactId>opencv-340.jar</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/lib/opencv-340.jar</systemPath>
+        </dependency>
+
         <!-- json -->
         <dependency>
             <groupId>com.alibaba</groupId>
