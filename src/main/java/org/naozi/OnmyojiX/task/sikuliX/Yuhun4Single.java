@@ -1,8 +1,7 @@
-package org.naozi.OnmyojiX.task.Onmyoji;
+package org.naozi.OnmyojiX.task.sikuliX;
 
 import org.naozi.OnmyojiX.config.OnmyojiConfig;
 import org.naozi.OnmyojiX.loader.PropertiesLoader;
-import org.naozi.OnmyojiX.task.BasicTask;
 import org.sikuli.script.Region;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

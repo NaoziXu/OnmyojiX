@@ -1,4 +1,4 @@
-package org.naozi.OnmyojiX.task;
+package org.naozi.OnmyojiX.task.sikuliX;
 
 import org.naozi.OnmyojiX.config.OnmyojiConfig;
 import org.naozi.OnmyojiX.loader.PropertiesLoader;
