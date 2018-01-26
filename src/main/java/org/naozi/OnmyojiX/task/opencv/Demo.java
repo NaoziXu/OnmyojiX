@@ -1,17 +1,12 @@
 package org.naozi.OnmyojiX.task.opencv;
 
 import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
-
-import java.awt.*;
-import java.awt.event.InputEvent;
 
 /**
  * @author lenovo
  * @date 2018/1/12
  */
-public class Demo extends BasicTask {
+public class Demo extends BaseTask {
 
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);

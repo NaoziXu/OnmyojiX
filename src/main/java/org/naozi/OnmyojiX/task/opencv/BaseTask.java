@@ -1,25 +1,23 @@
 package org.naozi.OnmyojiX.task.opencv;
 
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.highgui.Highgui;
+import org.opencv.core.*;
+import org.opencv.core.Point;
 import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.InputStream;
-import java.util.Date;
+import java.util.ArrayList;
 
 /**
  * @author lenovo
  * @date 2018/1/25
  */
-public class BasicTask {
+public abstract class BaseTask {
 
     /**
      * get current screen shot
@@ -37,9 +35,49 @@ public class BasicTask {
     }
 
     /**
-     * 将Mat类型转化成BufferedImage类型
-     * @param mat Mat对象
-     * @param fileExtension 文件扩展名
+     * get matched min location points
+     * @param pictureMat
+     * @param templateMat
+     * @param matchMethod
+     * @param peakThreshold
+     * @return
+     */
+    protected ArrayList<Point> getMatchLocList(Mat pictureMat, Mat templateMat, int matchMethod, double peakThreshold){
+        int resultCols = pictureMat.cols() - templateMat.cols() + 1;
+        int resultRows = pictureMat.rows() - templateMat.rows() + 1;
+
+        Mat result = new Mat(resultRows, resultCols, CvType.CV_32FC1);
+        Imgproc.matchTemplate(pictureMat,templateMat,result,matchMethod);
+        Core.normalize(result, result, 0, 1, Core.NORM_MINMAX, -1, new Mat());
+
+        if (matchMethod == Imgproc.TM_SQDIFF || matchMethod == Imgproc.TM_SQDIFF_NORMED) {
+            Imgproc.threshold(result,result,0.1,1,Imgproc.THRESH_BINARY_INV);
+        }
+        else {
+            Imgproc.threshold(result,result,0.9,1,Imgproc.THRESH_TOZERO);
+        }
+
+        ArrayList<Point> minLocResultList = new ArrayList<>();
+        double maxVal = 1;
+        while (maxVal > peakThreshold) {
+            Core.MinMaxLocResult minMaxLocResult = Core.minMaxLoc(result,new Mat());
+            maxVal = minMaxLocResult.maxVal;
+            if(maxVal > peakThreshold){
+                minLocResultList.add(new Point(minMaxLocResult.maxLoc.x, minMaxLocResult.maxLoc.y));
+                Imgproc.rectangle(result,
+                        new Point(minMaxLocResult.maxLoc.x - templateMat.width()/2,
+                                minMaxLocResult.maxLoc.y - templateMat.height()/2),
+                        new Point(minMaxLocResult.maxLoc.x + templateMat.width()/2,
+                                minMaxLocResult.maxLoc.y + templateMat.height()/2), Scalar.all(0),-1);
+            }
+        }
+        return minLocResultList;
+    }
+
+    /**
+     * cast a Mat to a BufferedImage
+     * @param mat
+     * @param fileExtension
      * @return
      */
     public static BufferedImage castMatToImg(Mat mat, String fileExtension) {
@@ -57,10 +95,10 @@ public class BasicTask {
     }
 
     /**
-     * 将BufferedImage类型转换成Mat类型
-     * @param original 已有的实例
-     * @param imgType bufferedImage的类型 如 BufferedImage.TYPE_3BYTE_BGR
-     * @param matType 转换成mat的type 如 CvType.CV_8UC3
+     * cast a BufferedImage to a Mat
+     * @param original
+     * @param imgType
+     * @param matType
      * @return
      */
     public static Mat castImgToMat(BufferedImage original, int imgType, int matType) {

@@ -45,6 +45,13 @@
             <systemPath>${project.basedir}/src/main/lib/opencv-340.jar</systemPath>
         </dependency>
 
+        <!-- sikulix -->
+        <dependency>
+            <groupId>com.sikulix</groupId>
+            <artifactId>sikulixapi</artifactId>
+            <version>${sikulix.version}</version>
+        </dependency>
+
         <!-- json -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -57,13 +64,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>${commons-lang3.version}</version>
-        </dependency>
-
-        <!-- sikulix -->
-        <dependency>
-            <groupId>com.sikulix</groupId>
-            <artifactId>sikulixapi</artifactId>
-            <version>${sikulix.version}</version>
         </dependency>
 
         <!-- log -->
@@ -117,6 +117,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
