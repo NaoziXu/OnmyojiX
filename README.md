@@ -1,5 +1,5 @@
-<a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
 OnmyojiX1.0
+<a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
 ===
 `OnmyojiX1.0`是一个基于`java`和`sikuliX1.1.1`实现的，针对阴阳师手游桌面版的进程控制辅助工具。主要功能是根据用户的配置完成阴阳师游戏中完全重复的游戏内容(目前支持八岐大蛇、业原火、觉醒和御灵)，解放玩家的双手去做更有意思的事情。至于为什么要叫这个名字，大概只是因为看起来比较帅气……  
 
